@@ -1,0 +1,15 @@
+type Query {
+  me: User,
+  UserList: [User]
+}
+
+type Mutation {
+  loginUser(username: String!, password: String!): String
+}
+
+type User {
+  id: Int,
+  display_name: String,
+  url: String,
+  gender: String
+}

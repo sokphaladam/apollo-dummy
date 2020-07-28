@@ -1,0 +1,28 @@
+{
+  "name": "todo",
+  "version": "1.0.0",
+  "main": "index.js",
+  "license": "MIT",
+  "dependencies": {
+    "@types/faker": "^4.1.12",
+    "apollo-server": "^2.16.1",
+    "babel-cli": "^6.26.0",
+    "cartoon-avatar": "^1.0.2",
+    "dotenv": "^8.2.0",
+    "faker": "^4.1.0",
+    "graphql": "^15.3.0",
+    "knex": "^0.21.2",
+    "koa": "^2.13.0",
+    "mysql2": "^2.1.0",
+    "nodemon": "^2.0.4",
+    "ts-node-dev": "^1.0.0-pre.56",
+    "tsc": "^1.20150623.0",
+    "typescript": "^3.9.7"
+  },
+  "scripts": {
+    "tsc": "tsc",
+    "dev": "ts-node-dev --respawn ./src/index.ts --transpileOnly",
+    "build": "tsc && babel src/graphql/schema -d dist/src/graphql/schema --copy-files",
+    "start": "tsc && node ./dist/src/index.js"
+  }
+}

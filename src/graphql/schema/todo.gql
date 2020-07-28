@@ -1,0 +1,37 @@
+extend type Query {
+  TodoList: [Todo]
+}
+
+extend type Mutation {
+  TodoCreate(data: TodoInput): Boolean,
+  TodoUpdate(id: Int!, data: TodoInput): Boolean,
+  TodoToggleStatus(id: Int!, status: StatusTodo): Boolean,
+  TodoAddMember(id: Int!, user_id: [Int]): Boolean,
+  TodoRemoverMember(id: Int!, user_id: [Int]): Boolean,
+}
+
+input TodoInput {
+  title: String!,
+  description: String!,
+  start_date: String!,
+  end_date: String!,
+  target: [Int]
+}
+
+type Todo {
+  id: Int,
+  title: String,
+  description: String,
+  start_date: String,
+  end_date: String,
+  status: StatusTodo,
+  target: [User]
+}
+
+enum StatusTodo {
+  New,
+  Delegated,
+  InProgress,
+  Canceled,
+  Completed
+}
