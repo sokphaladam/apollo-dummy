@@ -48,16 +48,25 @@ const TodoCreate = async (_: any, {data}: any, ctx: ContextType) => {
   target.push({
     todo_id: todo[0],
     user_id: user.id
-  })
+  });
 
   data.target.map((x: any) => {
     target.push({
       todo_id: todo[0],
       user_id: x
     })
-  })
+  });
 
   await knex('todo_targets').insert(target);
+  await ctx.pubsub.publish('@ADDTODO', { 
+    CommentCreated: {
+      id: todo[0],
+      title: data.title,
+      description: data.description,
+      start_date: data.start_date,
+      end_date: data.end_date
+    }
+  });
 
   return true
 }
@@ -71,12 +80,15 @@ const TodoUpdate = async (_: any, { id, data }: any, ctx: ContextType) => {
     start_date: data.start_date,
     end_date: data.end_date
   }).where({ id });
+
+  await ctx.pubsub.publish('@EDITTODO', {TodoUpdated: true});
   return true;
 }
 
 const TodoToggleStatus = async (_: any, { id, status }: any, ctx: ContextType) => {
   const knex = await ctx.knex;
   await knex('todos').update({ status }).where({ id });
+  await ctx.pubsub.publish('@EDITTODO', {TodoUpdated: true});
   return true;
 }
 

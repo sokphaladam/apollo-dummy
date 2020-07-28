@@ -15,7 +15,7 @@ input TodoInput {
   description: String!,
   start_date: String!,
   end_date: String!,
-  target: [Int]
+  target: [Int],
 }
 
 type Todo {

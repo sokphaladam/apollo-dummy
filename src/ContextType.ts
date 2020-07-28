@@ -1,12 +1,15 @@
 import { knex } from './setting';
 import Knex from 'knex';
+import { PubSub } from 'apollo-server';
+
 const toonavatar = require('cartoon-avatar');
+const pubsub = new PubSub();
 
 export type ContextType = {
-  knex: Knex,
+  knex: Knex;
   user: any;
+  pubsub: PubSub;
 }
-
 
 async function getToken(token: string){
   const user = await knex('users').where({ token }).first();
@@ -21,9 +24,17 @@ async function getToken(token: string){
 
 export const context = ({req}: any) => {
   if(req !== undefined){
-    return{
+    return {
       knex,
-      user: getToken(req.headers.token)
+      user: req.headers.token === undefined ? {} : getToken(req.headers.token),
+      pubsub
+    }
+  }
+  else {
+    return {
+      knex,
+      user: {},
+      pubsub
     }
   }
 }

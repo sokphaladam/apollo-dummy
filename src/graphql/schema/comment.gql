@@ -1,0 +1,14 @@
+extend type Query {
+  CommentList(todo_id: Int!): [Comment]
+}
+
+extend type Mutation {
+  CommentCreate(id: Int!, text: String!): Boolean
+}
+
+type Comment {
+  id: Int,
+  text: String,
+  user: User,
+  created_at: String 
+}

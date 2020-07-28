@@ -38,5 +38,16 @@ export const UserResolver = {
   },
   Mutation: {
     loginUser
+  },
+  Subscription: {
+    TodoCreated: {
+      subscribe: (_: any, {}, ctx: ContextType) => ctx.pubsub.asyncIterator(['@ADDTODO'])
+    },
+    CommentCreated: {
+      subscribe: (_: any, {}, ctx: ContextType) => ctx.pubsub.asyncIterator(['@ADDCOMMENT'])
+    },
+    TodoUpdated: {
+      subscribe: (_: any, {}, ctx: ContextType) => ctx.pubsub.asyncIterator(['@EDITTODO'])
+    }
   }
 }

@@ -7,6 +7,12 @@ type Mutation {
   loginUser(username: String!, password: String!): String
 }
 
+type Subscription {
+  TodoCreated: Todo,
+  CommentCreated: Comment,
+  TodoUpdated: Boolean
+}
+
 type User {
   id: Int,
   display_name: String,
