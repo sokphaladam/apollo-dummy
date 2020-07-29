@@ -35,7 +35,7 @@ const TodoList = async (_: any, {}, ctx: ContextType) => {
 
 const TodoCreate = async (_: any, {data}: any, ctx: ContextType) => {
   const knex = await ctx.knex;
-  const user: any = await ctx.knex;
+  const user: any = await ctx.user;
   const target: any[] = [];
 
   const todo = await knex('todos').insert({
