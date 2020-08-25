@@ -1,5 +1,6 @@
 extend type Query {
   TodoList: [Todo]
+  TodoById(id: Int!): Todo
 }
 
 extend type Mutation {

@@ -12,14 +12,19 @@ export type ContextType = {
 }
 
 async function getToken(token: string){
-  const user = await knex('users').where({ token }).first();
-  return {
-    ...user,
-    url: toonavatar.generate_avatar({
-      id: user.id,
-      gender: user.gender === 'M' ? 'male': 'female'
-    })
-  };
+  try{
+    const user = await knex('users').where({ token }).first();
+    return {
+      ...user,
+      url: toonavatar.generate_avatar({
+        id: user.id,
+        gender: user.gender === 'M' ? 'male': 'female'
+      })
+    };
+  }
+  catch(err) {
+    return;
+  }
 }
 
 export const context = ({req}: any) => {

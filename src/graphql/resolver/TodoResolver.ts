@@ -112,6 +112,28 @@ const TodoRemoverMember = async (_: any, { id, user_id }: any, ctx: ContextType)
   return true;
 }
 
+const TodoById = async (_: any, { id }: any, ctx: ContextType) => {
+  const knex = await ctx.knex;
+
+  const todo = await knex('todos').where({ id }).first();
+  const targets = await knex('todo_targets').where({ todo_id: todo.id });
+  const users = await knex('users').whereIn('id', targets.map(x => x.user_id));
+
+  return {
+    ...todo,
+    target: targets.map(x => {
+      const user = users.find(u => u.id === x.user_id);
+      return {
+        ...user,
+        url: toonavatar.generate_avatar({
+          id: user.id,
+          gender: user.gender === 'M' ? 'male': 'female'
+        })
+      }
+    })
+  }
+}
+
 export const TodoResolver = {
   StatusTodo: {
     New: 'New',
@@ -121,7 +143,8 @@ export const TodoResolver = {
     Completed: 'Completed'
   },
   Query: {
-    TodoList
+    TodoList,
+    TodoById
   },
   Mutation: {
     TodoCreate,
