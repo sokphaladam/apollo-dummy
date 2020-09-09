@@ -1,0 +1,29 @@
+extend type Query {
+  FeedList: [Feed]
+  FeedById(Id: Int!): Feed
+}
+
+extend type Mutation {
+  FeedCreate(data: FeedContactInput!): Boolean
+}
+
+input FeedContactInput {
+  description: String,
+  mediaUrl: String,
+  type: String,
+}
+
+type FeedContact {
+  description: String,
+  mediaUrl: String,
+  type: String,
+}
+
+type Feed {
+  contacts: FeedContact,
+  views: Int,
+  likes: Int,
+  comments: Int,
+  users: User,
+  created_at: String
+}

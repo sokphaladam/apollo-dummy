@@ -1,7 +1,8 @@
 import Knex from "knex";
 
-exports.up = function(knex: Knex) {
-  return knex.schema.createTable('comments', function(table) {
+exports.up = async function(knex: Knex) {
+  if(await knex.schema.hasTable('comments')) return;
+  return await knex.schema.createTable('comments', function(table) {
     table.increments();
     table.integer('todo_id');
     table.integer('user_id');

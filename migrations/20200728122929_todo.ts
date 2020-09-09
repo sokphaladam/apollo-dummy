@@ -1,6 +1,7 @@
 import Knex from "knex";
 
-exports.up = function(knex: Knex) {
+exports.up = async function(knex: Knex) {
+  if(await knex.schema.hasTable('todos')) return;
   return knex.schema.createTable('todos', function(table) {
     table.increments();
     table.string('title');

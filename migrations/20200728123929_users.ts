@@ -1,7 +1,8 @@
 import Knex from "knex";
 
-exports.up = function(knex: Knex) {
-  return knex.schema.createTable('users', function(table) {
+exports.up = async function(knex: Knex) {
+  if(await knex.schema.hasTable('users')) return;
+  return await knex.schema.createTable('users', function(table) {
     table.increments();
     table.string('display_name');
     table.string('username');
