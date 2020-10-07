@@ -4,7 +4,7 @@ module.exports = {
 
   development: {
     client: 'mysql2',
-    connection: 'mysql://remote:@p0lloapp@128.199.251.201/dummy'
+    connection: 'mysql://root:123456789@188.166.179.34/dummy'
   },
 
   staging: {

@@ -1,0 +1,16 @@
+extend type Query {
+  productList: JSON
+  productById(id: Int!): JSON
+}
+
+extend type Mutation {
+  productCreate(data: productInput): Boolean
+  productUpdate(data: productInput, id: Int!): Boolean
+}
+
+input productInput {
+  code: String,
+  name: String,
+  description: String,
+  price: String
+}

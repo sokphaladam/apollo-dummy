@@ -1,0 +1,16 @@
+extend type Query {
+  inventoryList: JSON
+  inventoryById(id: Int!): JSON
+}
+
+extend type Mutation {
+  inventoryCreate(data: inventoryInput): Boolean
+  inventoryUpdate(data: inventoryInput, id: Int!): Boolean
+  inventoryDelete(id: Int!): Boolean
+}
+
+input inventoryInput {
+  pro_id: Int,
+  stock_name: String,
+  unit: Int
+}
