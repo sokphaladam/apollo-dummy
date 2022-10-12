@@ -5,7 +5,7 @@
   "license": "MIT",
   "dependencies": {
     "@types/faker": "^4.1.12",
-    "apollo-server": "^2.16.1",
+    "apollo-server": "^2.25.4",
     "babel-cli": "^6.26.0",
     "cartoon-avatar": "^1.0.2",
     "dotenv": "^8.2.0",
